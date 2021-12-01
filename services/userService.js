@@ -48,7 +48,9 @@ class UserService {
     }
 
     async createUser({ user }) {
-        const { lastName, ci, city, password, passwordConfirm, age, email, civilStatus, dateBirth, gender, name } = user;
+        console.log("User service");
+        console.log(user);
+        const { name, lastName, age, email, password, passwordConfirm, ci, country, state, city, address, dateBirth, gender, civilStatus, postalCode, bloodType } = user;
         const hashedPassword = await bcrypt.hash(password, 10);
         const hashedPasswordConfirm = await bcrypt.hash(passwordConfirm, 10);
 

@@ -28,6 +28,7 @@ const userApi = (app) => {
         try {
             const confirmUser = await service.confirmUser(user);
             if (confirmUser.status === 'ok') {
+                console.log("No se puede crear");
                 res.status(400).json({
                     message: 'User could not be created',
                 });
