@@ -81,6 +81,28 @@ const userApi = (app) => {
             });
         }
     });
+
+    router.post('/update', async(req, res) => {
+        const { body: data } = req;
+        try {
+            const confirmUser = await service.confirmUser(data);
+            if (confirmUser.status === 'ok') {
+                const updateUser = await service.updateUser(data);
+                res.status(200).json({
+                    data: updateUser,
+                    message: 'Password update',
+                });
+            } else {
+                res.status(400).json({
+                    message: 'Could not update password',
+                });
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: 'Error update password',
+            });
+        }
+    });
 };
 
 module.exports = userApi;

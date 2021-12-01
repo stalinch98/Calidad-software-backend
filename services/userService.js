@@ -69,6 +69,16 @@ class UserService {
         return createdUserId;
     }
 
+
+    async updateUser(data) {
+        const hashedNewPassword = await bcrypt.hash(data.password, 10);
+        const hashedNewPasswordConfirm = await bcrypt.hash(data.passwordConfirm, 10);
+        data.password = hashedNewPassword;
+        data.passwordConfirm = hashedNewPasswordConfirm;
+        const updateUser = await this.mongoDB.update(this.collection, data);
+        return updateUser;
+    }
+
     async sendMail(infoMail) {
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
