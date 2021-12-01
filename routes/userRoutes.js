@@ -14,11 +14,11 @@ const userApi = (app) => {
             const findUser = await service.getUser(email);
             res.status(200).json({
                 data: findUser,
-                message: 'user finded',
+                message: 'ok',
             });
         } catch (error) {
-            res.status(400).json({
-                message: 'user not finded',
+            res.status(404).json({
+                message: 'could not login',
             });
         }
     });
@@ -40,7 +40,7 @@ const userApi = (app) => {
                 });
             }
         } catch (error) {
-            res.status(400).json({
+            res.status(404).json({
                 message: 'Error creating user',
             });
         }
@@ -55,7 +55,7 @@ const userApi = (app) => {
             const UserCode = await service.sendCode(data.email, code, subj, text);
             res.json(UserCode);
         } catch (error) {
-            res.status(400).json({
+            res.status(404).json({
                 message: 'Error sending mail',
             });
         }
@@ -72,12 +72,12 @@ const userApi = (app) => {
                 const UserCode = await service.sendCode(data.email, code, subj, text);
                 res.json(UserCode);
             } else {
-                res.status(400).json({
+                res.status(404).json({
                     message: 'Recovery code could not be sent',
                 });
             }
         } catch (error) {
-            res.status(400).json({
+            res.status(404).json({
                 message: 'Error sending mail',
             });
         }
@@ -94,12 +94,12 @@ const userApi = (app) => {
                     message: 'Password update',
                 });
             } else {
-                res.status(400).json({
+                res.status(404).json({
                     message: 'Could not update password',
                 });
             }
         } catch (error) {
-            res.status(400).json({
+            res.status(404).json({
                 message: 'Error update password',
             });
         }

@@ -22,13 +22,13 @@ class UserService {
                 status: 'error',
             };
             return userData;
+        } else {
+            const userData = {
+                status: 'ok',
+                username: user[0].name,
+            };
+            return userData;
         }
-
-        const userData = {
-            status: 'ok',
-            username: user[0].name,
-        };
-        return userData;
     }
 
     async confirmUser(data) {
