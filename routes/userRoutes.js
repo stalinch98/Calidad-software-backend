@@ -28,7 +28,7 @@ const userApi = (app) => {
         try {
             const confirmUser = await service.confirmUser(user);
             if (confirmUser.status === 'ok') {
-                console.log("No se puede crear");
+                console.log('No se puede crear');
                 res.status(400).json({
                     message: 'User could not be created',
                 });
@@ -48,9 +48,9 @@ const userApi = (app) => {
 
     router.post('/code', async(req, res) => {
         const { body: data } = req;
-        const code = Math.floor(Math.random() * 500);
-        const subj = "Authentication"
-        const text = "Your code for authentication is: ";
+        const code = Math.floor(Math.random() * (9999 - 1000) + 1000);
+        const subj = 'Authentication';
+        const text = 'Your code for authentication is: ';
         try {
             const UserCode = await service.sendCode(data.email, code, subj, text);
             res.json(UserCode);
@@ -63,9 +63,9 @@ const userApi = (app) => {
 
     router.post('/recovery', async(req, res) => {
         const { body: data } = req;
-        const code = Math.floor(Math.random() * 500);
-        const subj = "Recovery Password"
-        const text = "Your code to recovery your password is: ";
+        const code = Math.floor(Math.random() * (9999 - 1000) + 1000);
+        const subj = 'Recovery Password';
+        const text = 'Your code to recovery your password is: ';
         try {
             const confirmUser = await service.confirmUser(data);
             if (confirmUser.status === 'ok') {
