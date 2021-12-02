@@ -102,7 +102,9 @@ class UserService {
 
     async sendCode(email, code, subj, text) {
         const hashedCode = await bcrypt.hash(`${code}`, 10);
-        console.log(hashedCode);
+        if (hashedCode.includes("/")) {
+            hashCode.replace(/\//g, "slash");
+        }
         const mail = {
             from: config.emailUser,
             to: email,
@@ -110,7 +112,6 @@ class UserService {
             html: `${text}${code}`,
         }
         const rta = await this.sendMail(mail);
-        console.log(rta);
         rta.code = code;
         rta.hashedCode = hashedCode;
         return rta;
